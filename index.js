@@ -21,14 +21,27 @@ conn.connect((err) => {
     console.log('Mysql Connected...');
 });
 
+// SELECT a.id , a.title_article , a.article , a.img_article, a.post_date , b.name_author , b.img_author FROM blog a INNER JOIN author b ON a.id_author = b.id
+
 //tampilkan semua data 
 app.get('/api/ticket', (req, res) => {
     let sql = "SELECT * FROM ticket";
     let query = conn.query(sql, (err, results) => {
-        if (err) throw err; 
+        if (err) throw err;
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
         // res.json(results);
+    });
+});
+
+//tampilkan semua data 
+app.get('/api/blog', (req, res) => {
+    let sql = "SELECT a.id , a.title_article , a.article , a.img_article, a.post_date , b.name_author , b.img_author FROM blog a INNER JOIN author b ON a.id_author = b.id";
+    let query = conn.query(sql, (err, results) => {
+        if (err) throw err;
+        res.setHeader('Content-Type', 'application/json');
+        // res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.json(results);
     });
 });
 
