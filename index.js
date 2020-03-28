@@ -29,7 +29,11 @@ app.get('/api/ticket', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) throw err;
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": results
+        }));
         // res.json(results);
     });
 });
@@ -51,20 +55,32 @@ app.get('/api/ticket/:id', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) throw err;
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": results
+        }));
     });
 });
 
 //Tambahkan data baru
 app.post('/api/ticket', (req, res) => {
     // console.log(req.body)
-    let data = { place: req.body.place, booked_name: req.body.booked_name, booked_date: req.body.booked_date };
+    let data = {
+        place: req.body.place,
+        booked_name: req.body.booked_name,
+        booked_date: req.body.booked_date
+    };
     let sql = "INSERT INTO ticket SET ?";
     let query = conn.query(sql, data, (err, results) => {
         if (err) throw err;
         // console.log(query);
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": results
+        }));
     });
 });
 
@@ -74,7 +90,11 @@ app.put('/api/ticket/:id', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) throw err;
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": results
+        }));
     });
 });
 
@@ -84,7 +104,11 @@ app.delete('/api/ticket/:id', (req, res) => {
     let query = conn.query(sql, (err, results) => {
         if (err) throw err;
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+        res.send(JSON.stringify({
+            "status": 200,
+            "error": null,
+            "response": results
+        }));
     });
 });
 
