@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // // Create a new Tutorial
-    // router.post("/", articles.create);
+    router.post("/", articles.create);
 
     // Retrieve all articles
     router.get("/", articles.findAll);
@@ -16,10 +16,10 @@ module.exports = app => {
     // router.get("/:id", articles.findOne);
 
     // // Update a Tutorial with id
-    // router.put("/:id", articles.update);
+    router.put("/:id", articles.update);
 
     // // Delete a Tutorial with id
-    // router.delete("/:id", articles.delete);
+    router.delete("/:id", articles.delete);
 
     // // Create a new Tutorial
     // router.delete("/", articles.deleteAll);
