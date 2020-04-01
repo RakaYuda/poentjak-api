@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Mar 2020 pada 10.32
+-- Waktu pembuatan: 01 Apr 2020 pada 11.56
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.3.7
 
@@ -54,6 +54,7 @@ CREATE TABLE `blog` (
   `title_article` varchar(255) NOT NULL,
   `article` text NOT NULL,
   `post_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `published` tinyint(1) NOT NULL,
   `id_author` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -61,9 +62,12 @@ CREATE TABLE `blog` (
 -- Dumping data untuk tabel `blog`
 --
 
-INSERT INTO `blog` (`id`, `img_article`, `title_article`, `article`, `post_date`, `id_author`) VALUES
-(1, 'https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Happiest At The Beach', 'Water, as an element, has a calming effect and gives you a sense of clarity. The best vacation spots across the world are surrounded by incredible water bodies. From Maldives to Barbados, countless people visit these regions to let their worries drift away.\r\nUnderstandably so. Because beaches have a way of instilling tranquility with leisure -allowing us to let go of our worries and problems. For ages, the beach has been the place to take a break from reality, triggering contentment and bringing out our inner child.\r\n', '2020-03-24 04:52:52', 1),
-(2, 'https://images.pexels.com/photos/391522/pexels-photo-391522.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Painting the sky', 'I always enjoy painting the sky.\r\nI imagine a magic pencil on the tip of my finger or in the line of my vision, with which I put blue around here, green over there and purple on the other side.\r\nThe sky really improves when you paint it the way you like it.\r\nSometimes I run out of ideas, then I blow a few soap bubbles and get inspired by the wonderful colors of the sky reflected in them, it’s like charging my imagination to the fullest.\r\nThen I take the pencil again and give free rein to the passion that drives me to rethink the sky. Because the sky is mine and I don’t understand why it has to be the color everyone says it is. I want my sky with large portions of cobalt blue, but full of small bright yellow pints. And just under the blue ones, green ones like those of my uncle Cholo’s pasture; and among the green, some beautiful white, black, brown and yellow balls, like the cattle that graze happily in that beautiful land.\r\nBecause the sky encompasses my life, my memories and my desires and if I want it to be black with a light blue jasper and white as the night of rain or white with celestial flashes like the sunrises on the mountain, then that color will be, because it is mine.\r\nBut if you want, I can share it with you. You can enter wherever you want, in my sky there is no gravity. You can also take out your own pencil and put the colors you want, my sky is open to all colors and all strokes, because it is mine and mine is yours.', '2020-03-21 17:00:00', 3);
+INSERT INTO `blog` (`id`, `img_article`, `title_article`, `article`, `post_date`, `published`, `id_author`) VALUES
+(1, 'https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Happiest At The Beach', 'Water, as an element, has a calming effect and gives you a sense of clarity. The best vacation spots across the world are surrounded by incredible water bodies. From Maldives to Barbados, countless people visit these regions to let their worries drift away.\r\nUnderstandably so. Because beaches have a way of instilling tranquility with leisure -allowing us to let go of our worries and problems. For ages, the beach has been the place to take a break from reality, triggering contentment and bringing out our inner child.\r\n', '2020-04-01 09:14:00', 1, 1),
+(2, 'https://images.pexels.com/photos/1122408/pexels-photo-1122408.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Holiday Handover Hints', 'Everyone who works in an office environment has those times in the run up to their annual leave when they’re rushing around, trying to get things done, and worrying about what’s going to happen when they’re away and thus what mess they’re going to come back to.', '2020-04-01 09:16:58', 1, 3),
+(3, 'https://images.pexels.com/photos/1047051/pexels-photo-1047051.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'The holiday', 'He sat in his seat, trying to stretch his legs in what little room he had with seats squeezed in both each side and in front. He had dozed off just after take off, trying to relax after the hustle and bustle of the airport. He never understood airports. Everyone rushing to get to the front of the queue to board the plane, even though everyone had pre-booked seats months in advance, people lugging their suitcases through the airport instead of checking them in to the hold.\r\nAll that fuss was over with for the time being, all he had to cope with now was being crammed into a tight fitting seat for several hours without enough room to straighten his legs or his arms.\r\nHe shut his eyes again and laid back in the chair, trying to forget his current surroundings.', '2020-03-30 03:33:23', 0, 1),
+(5, 'https://images.pexels.com/photos/3178818/pexels-photo-3178818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Holidays Make Productive', 'The main reason is because many employees felt guilty to take the paid holiday leave.\nIn fact, some scientific research shows that more holidays can make the employees happier, healthier, and more productive at work.\nIn this article, I will show you six reasons why taking more holidays can make you more productive, and I am sure you will be surprised the reason number 6.\nReason 1: Employees Can Have Better Work Performance', '2020-03-01 09:02:10', 0, 1),
+(6, 'https://images.pexels.com/photos/1853373/pexels-photo-1853373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', '5 Best Beaches In Indonesia', 'Indonesia is a country which is situated between the Indian and Pacific oceans. It is the archipelago consisting of almost more than 13000 islands. The islands are having many volcanoes, beaches, jungles and wildlife.\nThe country is having some of the best beaches in Asia. Here is the list of some best beaches in Indonesia.\n1. Nihiwatu Beach, Sumba\n2. Nusa Dua Beach, Bali\n3. Nusa Penida Beach, Bali Island\n4. Gili Meno Beach, Gili Islands\n5. Pink Beach, Komodo\n', '2020-03-02 06:53:32', 0, 3);
 
 -- --------------------------------------------------------
 
@@ -131,7 +135,7 @@ ALTER TABLE `author`
 -- AUTO_INCREMENT untuk tabel `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `ticket`

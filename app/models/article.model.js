@@ -1,21 +1,32 @@
 // const Author = require("./author.model.js");
 module.exports = (sequelize, Sequelize) => {
-    // const Author = sequelize.define("author", {
+
+    // const Blog = sequelize.define("blog", {
     //     id: {
     //         primaryKey: true,
     //         type: Sequelize.INTEGER
     //     },
-    //     name_author: {
+    //     img_article: {
     //         type: Sequelize.STRING
     //     },
-    //     img_author: {
+    //     title_article: {
     //         type: Sequelize.STRING
-    //     }
+    //     },
+    //     article: {
+    //         type: Sequelize.TEXT
+    //     },
+    //     post_date: {
+    //         type: Sequelize.DATE
+    //     },
+
+
     // }, {
     //     timestamp: false,
-    //     tableName: "author"
+    //     tableName: "blog",
+
     // });
-    const Blog = sequelize.define("blog", {
+
+    const Article = sequelize.define("article", {
         id: {
             primaryKey: true,
             type: Sequelize.INTEGER
@@ -32,22 +43,17 @@ module.exports = (sequelize, Sequelize) => {
         post_date: {
             type: Sequelize.DATE
         },
+        published: {
+            type: Sequelize.BOOLEAN
+        },
+        id_author: {
+            type: Sequelize.INTEGER,
+        }
 
 
     }, {
         timestamp: false,
         tableName: "blog",
-        // classMethods: {
-        //     associate: function (model) {
-        //         Blog.hasOne(Author, {
-        //             foreignKey: 'id_author'
-        //         });
-        //     }
-        // }
     });
-    // Blog.belongsTo(Author, {
-    //     as: 'author',
-    //     foreignKey: 'id_author'
-    // })
-    return Blog;
+    return Article;
 };

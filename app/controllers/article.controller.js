@@ -1,6 +1,6 @@
 const db = require("../models");
-// const Blog = db.blog;
-// const Author = db.author;
+// const Article = db.Article;
+// const Author = db.Author;
 const Op = db.Sequelize.Op;
 
 const Author = db.sequelize.define("author", {
@@ -18,7 +18,7 @@ const Author = db.sequelize.define("author", {
     timestamp: false,
     tableName: "author",
 });
-const Blog = db.sequelize.define("blog", {
+const Article = db.sequelize.define("article", {
     id: {
         primaryKey: true,
         type: db.Sequelize.INTEGER
@@ -35,6 +35,9 @@ const Blog = db.sequelize.define("blog", {
     post_date: {
         type: db.Sequelize.DATE
     },
+    published: {
+        type: db.Sequelize.BOOLEAN
+    },
     id_author: {
         type: db.Sequelize.INTEGER,
     }
@@ -45,11 +48,11 @@ const Blog = db.sequelize.define("blog", {
     tableName: "blog",
 });
 // Article.hasOne(Author);
-Blog.belongsTo(Author, {
+Article.belongsTo(Author, {
     as: 'author',
     foreignKey: 'id_author'
 })
-// Author.hasOne(Blog, {
+// Author.hasOne(Article, {
 //     foreignKey: 'author_id'
 // });
 
@@ -64,7 +67,7 @@ exports.create = (req, res) => {
     }
 
     // Create a Tutorial
-    const blog = {
+    const article = {
         // title: req.body.title,
         // description: req.body.description,
         // published: req.body.published ? req.body.published : false
@@ -73,11 +76,12 @@ exports.create = (req, res) => {
         title_article: req.body.title_article,
         article: req.body.article,
         post_date: req.body.post_date,
+        published: req.body.published,
         id_author: req.body.id_author
     };
 
     // Save Tutorial in the database
-    Blog.create(blog)
+    Article.create(article)
         .then(data => {
             res.send(data);
         })
@@ -99,7 +103,7 @@ exports.findAll = (req, res) => {
         }
     } : null;
 
-    Blog.findAll({
+    Article.findAll({
         where: condition,
         include: [{ // Notice `include` takes an ARRAY
             model: Author,
@@ -117,15 +121,25 @@ exports.findAll = (req, res) => {
 };
 
 // // Find a single Tutorial with an id
-// exports.findOne = (req, res) => {
+exports.findOne = (req, res) => {
+    const id = req.params.id;
 
-// };
+    Article.findByPk(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Tutorial with id=" + id
+            });
+        });
+}
 
 // // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Blog.update(req.body, {
+    Article.update(req.body, {
         where: { id: id }
     })
         .then(data => {
@@ -153,7 +167,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Blog.destroy({
+    Article.destroy({
         where: { id: id }
     })
         .then(num => {
@@ -180,6 +194,15 @@ exports.delete = (req, res) => {
 // };
 
 // // Find all published Tutorials
-// exports.findAllPublished = (req, res) => {
-
-// };
+exports.findAllPublished = (req, res) => {
+    Article.findAll({ where: { published: true } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Articles."
+            });
+        });
+};

@@ -12,10 +12,8 @@ module.exports = (sequelize, Sequelize) => {
         }
     }, {
         timestamp: false,
-        tableName: "author"
+        tableName: "author",
     });
-
-
 
     return Author;
 };
