@@ -87,8 +87,7 @@ exports.create = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the Tutorial."
+                message: err.message || "Some error occurred while creating the Tutorial."
             });
         });
 };
@@ -104,13 +103,36 @@ exports.findAll = (req, res) => {
     } : null;
 
     Article.findAll({
-        where: condition,
-        include: [{ // Notice `include` takes an ARRAY
-            model: Author,
-            as: 'author'
-        }]
-    })
+            where: condition,
+            include: [{ // Notice `include` takes an ARRAY
+                model: Author,
+                as: 'author'
+            }],
+            attributes: [
+                "id",
+                "img_article",
+                "title_article",
+                "article",
+                [db.sequelize.fn('date_format', db.sequelize.col('post_date'), '%Y-%m-%d %H:%i:%S'), 'post_date'],
+                "published",
+                // "id_author",
+            ]
+        })
+        // .then(function (result) {
+        //     console.log(result);
+
+        // })
         .then(data => {
+
+            // for (let i in data) {
+            //     console.log(data[i].dataValues.post_date);
+            //     let tsData = data[i].dataValues.post_date.toString();
+            //     let tsSpllited = tsData.split("T");
+            //     let tsDate = tsSpllited[0]
+            //     let tsTime = tsSpllited[1]
+            //     console.log(tsTime, tsTime);
+            // }
+
             res.send(data);
         })
         .catch(err => {
@@ -140,8 +162,10 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Article.update(req.body, {
-        where: { id: id }
-    })
+            where: {
+                id: id
+            }
+        })
         .then(data => {
             res.send({
                 message: "Article was updated successfully."
@@ -168,8 +192,10 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Article.destroy({
-        where: { id: id }
-    })
+            where: {
+                id: id
+            }
+        })
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -195,14 +221,30 @@ exports.delete = (req, res) => {
 
 // // Find all published Tutorials
 exports.findAllPublished = (req, res) => {
-    Article.findAll({ where: { published: true } })
+    Article.findAll({
+            where: {
+                published: true
+            },
+            include: [{ // Notice `include` takes an ARRAY
+                model: Author,
+                as: 'author'
+            }],
+            attributes: [
+                "id",
+                "img_article",
+                "title_article",
+                "article",
+                [db.sequelize.fn('date_format', db.sequelize.col('post_date'), '%Y-%m-%d %H:%i:%S'), 'post_date'],
+                "published",
+                // "id_author",
+            ]
+        }, )
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Articles."
+                message: err.message || "Some error occurred while retrieving Articles."
             });
         });
 };
