@@ -1,31 +1,6 @@
 // const Author = require("./author.model.js");
 module.exports = (sequelize, Sequelize) => {
 
-    // const Blog = sequelize.define("blog", {
-    //     id: {
-    //         primaryKey: true,
-    //         type: Sequelize.INTEGER
-    //     },
-    //     img_article: {
-    //         type: Sequelize.STRING
-    //     },
-    //     title_article: {
-    //         type: Sequelize.STRING
-    //     },
-    //     article: {
-    //         type: Sequelize.TEXT
-    //     },
-    //     post_date: {
-    //         type: Sequelize.DATE
-    //     },
-
-
-    // }, {
-    //     timestamp: false,
-    //     tableName: "blog",
-
-    // });
-
     const Article = sequelize.define("article", {
         id: {
             primaryKey: true,
