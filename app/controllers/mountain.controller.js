@@ -21,6 +21,28 @@ const Mountain = db.sequelize.define("mountain", {
     tableName: "mountain",
 });
 
+const Image_Mountain = db.sequelize.define("image_mountain", {
+    id: {
+        primaryKey: true,
+        type: db.Sequelize.INTEGER
+    },
+    img_mt: {
+        type: db.Sequelize.STRING
+    },
+    id_mountain: {
+        type: db.Sequelize.INTEGER
+    }
+
+}, {
+    timestamp: false,
+    tableName: "list_image_mountain",
+});
+
+Mountain.hasMany(Image_Mountain, {
+    as: 'image_mountain',
+    foreignKey: 'id_mountain'
+})
+
 // Create and Save a new Mountain
 exports.create = (req, res) => {
     // Validate request
@@ -62,6 +84,10 @@ exports.findAll = (req, res) => {
 
     Mountain.findAll({
             where: condition,
+            include: [{ // Notice `include` takes an ARRAY
+                model: Image_Mountain,
+                as: 'image_mountain'
+            }],
         })
         .then(data => {
             res.send(data);
