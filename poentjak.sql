@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: 19 Mei 2020 pada 09.08
--- Versi Server: 5.7.29-0ubuntu0.18.04.1
--- PHP Version: 7.2.24-0ubuntu0.18.04.4
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 28 Bulan Mei 2020 pada 06.56
+-- Versi server: 10.3.16-MariaDB
+-- Versi PHP: 7.3.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cinema`
+-- Database: `poentjak`
 --
 
 -- --------------------------------------------------------
@@ -51,7 +53,7 @@ CREATE TABLE `blog` (
   `img_article` varchar(255) NOT NULL,
   `title_article` varchar(255) NOT NULL,
   `article` text NOT NULL,
-  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `post_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `published` tinyint(1) NOT NULL,
   `id_author` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -110,60 +112,97 @@ INSERT INTO `mountain` (`id`, `name_mt`, `img_mt`, `location`) VALUES
 (1, 'Mt. Fuji', 'https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Honshu, Japan'),
 (2, 'Mt. Everest', 'https://www.outsideonline.com/sites/default/files/styles/full-page/public/2020/03/11/everest-north-side-china_h.jpg?itok=envCwX0c', 'Southeast Ridge, Nepal');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mountain_post`
+--
+
+CREATE TABLE `mountain_post` (
+  `id` int(11) NOT NULL,
+  `post_name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `id_mountain` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `mountain_post`
+--
+
+INSERT INTO `mountain_post` (`id`, `post_name`, `description`, `id_mountain`) VALUES
+(1, 'POST 1', 'You\'ve reach 1025 masl', 2);
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `author`
+-- Indeks untuk tabel `author`
 --
 ALTER TABLE `author`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `blog`
+-- Indeks untuk tabel `blog`
 --
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_author` (`id_author`);
 
 --
--- Indexes for table `list_image_mountain`
+-- Indeks untuk tabel `list_image_mountain`
 --
 ALTER TABLE `list_image_mountain`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mountain` (`id_mountain`);
 
 --
--- Indexes for table `mountain`
+-- Indeks untuk tabel `mountain`
 --
 ALTER TABLE `mountain`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeks untuk tabel `mountain_post`
+--
+ALTER TABLE `mountain_post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_mountain` (`id_mountain`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `author`
+-- AUTO_INCREMENT untuk tabel `author`
 --
 ALTER TABLE `author`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `blog`
+-- AUTO_INCREMENT untuk tabel `blog`
 --
 ALTER TABLE `blog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
--- AUTO_INCREMENT for table `list_image_mountain`
+-- AUTO_INCREMENT untuk tabel `list_image_mountain`
 --
 ALTER TABLE `list_image_mountain`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `mountain`
+-- AUTO_INCREMENT untuk tabel `mountain`
 --
 ALTER TABLE `mountain`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `mountain_post`
+--
+ALTER TABLE `mountain_post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -179,6 +218,13 @@ ALTER TABLE `blog`
 --
 ALTER TABLE `list_image_mountain`
   ADD CONSTRAINT `list_image_mountain_ibfk_1` FOREIGN KEY (`id_mountain`) REFERENCES `mountain` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `mountain_post`
+--
+ALTER TABLE `mountain_post`
+  ADD CONSTRAINT `mountain_post_ibfk_1` FOREIGN KEY (`id_mountain`) REFERENCES `mountain` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
