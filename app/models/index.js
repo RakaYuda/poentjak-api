@@ -22,6 +22,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.blog = require("./article.model.js")(sequelize, Sequelize);
+db.articles = require("./article.model.js")(sequelize, Sequelize);
+db.authors = require("./author.model.js")(sequelize, Sequelize);
+db.mountains = require("./mountain.model.js")(sequelize, Sequelize);
+db.image_mountains = require("./image_mountain.model.js")(sequelize, Sequelize);
+db.post_mountains = require("./post_mountain.model.js")(sequelize, Sequelize);
 
 module.exports = db;

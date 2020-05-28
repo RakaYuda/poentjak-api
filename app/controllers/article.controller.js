@@ -1,63 +1,19 @@
 const db = require("../models");
-// const Article = db.Article;
-// const Author = db.Author;
+const Article = db.articles;
+const Author = db.authors;
 const Op = db.Sequelize.Op;
 
-const Author = db.sequelize.define("author", {
-    id: {
-        primaryKey: true,
-        type: db.Sequelize.INTEGER
-    },
-    name_author: {
-        type: db.Sequelize.STRING
-    },
-    img_author: {
-        type: db.Sequelize.STRING
-    }
-}, {
-    timestamp: false,
-    tableName: "author",
-});
-const Article = db.sequelize.define("article", {
-    id: {
-        primaryKey: true,
-        type: db.Sequelize.INTEGER
-    },
-    img_article: {
-        type: db.Sequelize.STRING
-    },
-    title_article: {
-        type: db.Sequelize.STRING
-    },
-    article: {
-        type: db.Sequelize.TEXT
-    },
-    post_date: {
-        type: db.Sequelize.DATE
-    },
-    published: {
-        type: db.Sequelize.BOOLEAN
-    },
-    id_author: {
-        type: db.Sequelize.INTEGER,
-    }
 
-
-}, {
-    timestamp: false,
-    tableName: "blog",
-});
-// Article.hasOne(Author);
+// Adding foreign key from article to author
 Article.belongsTo(Author, {
     as: 'author',
     foreignKey: 'id_author'
 })
-// Author.hasOne(Article, {
-//     foreignKey: 'author_id'
-// });
 
-// Create and Save a new Tutorial
+
+// Create and Save a new Article
 exports.create = (req, res) => {
+
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -66,12 +22,9 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a Tutorial
+    // Create a Article
     const article = {
-        // title: req.body.title,
-        // description: req.body.description,
         // published: req.body.published ? req.body.published : false
-        // id: req.body.id,
         img_article: req.body.img_article,
         title_article: req.body.title_article,
         article: req.body.article,
@@ -80,20 +33,20 @@ exports.create = (req, res) => {
         id_author: req.body.id_author
     };
 
-    // Save Tutorial in the database
+    // Save Article in the database
     Article.create(article)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Tutorial."
+                message: err.message || "Some error occurred while creating the Article."
             });
         });
 };
 
 
-// Retrieve all Tutorials from the database.
+// Retrieve all Articles from the database.
 exports.findAll = (req, res) => {
     const title_article = req.query.title_article;
     var condition = title_article ? {
@@ -104,7 +57,7 @@ exports.findAll = (req, res) => {
 
     Article.findAll({
             where: condition,
-            include: [{ // Notice `include` takes an ARRAY
+            include: [{
                 model: Author,
                 as: 'author'
             }],
@@ -124,15 +77,6 @@ exports.findAll = (req, res) => {
         // })
         .then(data => {
 
-            // for (let i in data) {
-            //     console.log(data[i].dataValues.post_date);
-            //     let tsData = data[i].dataValues.post_date.toString();
-            //     let tsSpllited = tsData.split("T");
-            //     let tsDate = tsSpllited[0]
-            //     let tsTime = tsSpllited[1]
-            //     console.log(tsTime, tsTime);
-            // }
-
             res.send(data);
         })
         .catch(err => {
@@ -142,7 +86,7 @@ exports.findAll = (req, res) => {
         });
 };
 
-// // Find a single Tutorial with an id
+// // Find a single Article with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
@@ -152,12 +96,12 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Tutorial with id=" + id
+                message: "Error retrieving Article with id=" + id
             });
         });
 }
 
-// // Update a Tutorial by the id in the request
+// // Update a Article by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
 
@@ -172,22 +116,22 @@ exports.update = (req, res) => {
             });
             // if (num == 1) {
             //     res.send({
-            //         message: "Tutorial was updated successfully."
+            //         message: "Article was updated successfully."
             //     });
             // } else {
             //     res.send({
-            //         message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+            //         message: `Cannot update Article with id=${id}. Maybe Article was not found or req.body is empty!`
             //     });
             // }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Tutorial with id=" + id
+                message: "Error updating Article with id=" + id
             });
         });
 }
 
-// // Delete a Tutorial with the specified id in the request
+// // Delete a Article with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
 
@@ -203,23 +147,23 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+                    message: `Cannot delete Article with id=${id}. Maybe Article was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Tutorial with id=" + id
+                message: "Could not delete Article with id=" + id
             });
         });
 };
 
-// // Delete all Tutorials from the database.
+// // Delete all Articles from the database.
 // exports.deleteAll = (req, res) => {
 
 // };
 
-// // Find all published Tutorials
+// Find all published Articles
 exports.findAllPublished = (req, res) => {
     Article.findAll({
             where: {

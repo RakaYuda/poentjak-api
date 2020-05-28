@@ -1,45 +1,17 @@
 const db = require("../models");
 const Op = db.Sequelize.Op;
+const Mountain = db.mountains;
+const Image_Mountain = db.image_mountains;
+const Post_Mountain = db.post_mountains;
 
-const Mountain = db.sequelize.define("mountain", {
-    id: {
-        primaryKey: true,
-        type: db.Sequelize.INTEGER
-    },
-    name_mt: {
-        type: db.Sequelize.STRING
-    },
-    img_mt: {
-        type: db.Sequelize.STRING
-    },
-    location: {
-        type: db.Sequelize.STRING
-    }
-
-}, {
-    timestamp: false,
-    tableName: "mountain",
-});
-
-const Image_Mountain = db.sequelize.define("image_mountain", {
-    id: {
-        primaryKey: true,
-        type: db.Sequelize.INTEGER
-    },
-    img_mt: {
-        type: db.Sequelize.STRING
-    },
-    id_mountain: {
-        type: db.Sequelize.INTEGER
-    }
-
-}, {
-    timestamp: false,
-    tableName: "list_image_mountain",
-});
 
 Mountain.hasMany(Image_Mountain, {
     as: 'image_mountain',
+    foreignKey: 'id_mountain'
+})
+
+Mountain.hasMany(Post_Mountain, {
+    as: 'post_mountain',
     foreignKey: 'id_mountain'
 })
 
@@ -84,10 +56,14 @@ exports.findAll = (req, res) => {
 
     Mountain.findAll({
             where: condition,
-            include: [{ // Notice `include` takes an ARRAY
+            include: [
+            { // Notice `include` takes an ARRAY
                 model: Image_Mountain,
                 as: 'image_mountain'
-            }],
+            },{ 
+                model: Post_Mountain,
+                as: 'post_mountain'
+            },],
         })
         .then(data => {
             res.send(data);

@@ -1,25 +1,8 @@
 const db = require("../models");
-// const Article = db.Article;
-// const Author = db.Author;
+const Author = db.authors;
 const Op = db.Sequelize.Op;
 
-const Author = db.sequelize.define("author", {
-    id: {
-        primaryKey: true,
-        type: db.Sequelize.INTEGER
-    },
-    name_author: {
-        type: db.Sequelize.STRING
-    },
-    img_author: {
-        type: db.Sequelize.STRING
-    }
-}, {
-    timestamp: false,
-    tableName: "author",
-});
-
-// Create and Save a new Tutorial
+// Create and Save a new Author
 // exports.create = (req, res) => {
 //     // Validate request
 //     if (!req.body) {
@@ -29,7 +12,7 @@ const Author = db.sequelize.define("author", {
 //         return;
 //     }
 
-//     // Create a Tutorial
+//     // Create a Author
 //     const article = {
 //         // title: req.body.title,
 //         // description: req.body.description,
@@ -43,7 +26,7 @@ const Author = db.sequelize.define("author", {
 //         id_author: req.body.id_author
 //     };
 
-//     // Save Tutorial in the database
+//     // Save Author in the database
 //     Article.create(article)
 //         .then(data => {
 //             res.send(data);
@@ -51,7 +34,7 @@ const Author = db.sequelize.define("author", {
 //         .catch(err => {
 //             res.status(500).send({
 //                 message:
-//                     err.message || "Some error occurred while creating the Tutorial."
+//                     err.message || "Some error occurred while creating the Author."
 //             });
 //         });
 // };
@@ -83,7 +66,7 @@ exports.findAll = (req, res) => {
         });
 };
 
-// // Find a single Tutorial with an id
+// // Find a single Author with an id
 // exports.findOne = (req, res) => {
 //     const id = req.params.id;
 
@@ -93,12 +76,12 @@ exports.findAll = (req, res) => {
 //         })
 //         .catch(err => {
 //             res.status(500).send({
-//                 message: "Error retrieving Tutorial with id=" + id
+//                 message: "Error retrieving Author with id=" + id
 //             });
 //         });
 // }
 
-// // Update a Tutorial by the id in the request
+// // Update a Author by the id in the request
 // exports.update = (req, res) => {
 //     const id = req.params.id;
 
@@ -111,22 +94,22 @@ exports.findAll = (req, res) => {
 //             });
 //             // if (num == 1) {
 //             //     res.send({
-//             //         message: "Tutorial was updated successfully."
+//             //         message: "Author was updated successfully."
 //             //     });
 //             // } else {
 //             //     res.send({
-//             //         message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+//             //         message: `Cannot update Author with id=${id}. Maybe Author was not found or req.body is empty!`
 //             //     });
 //             // }
 //         })
 //         .catch(err => {
 //             res.status(500).send({
-//                 message: "Error updating Tutorial with id=" + id
+//                 message: "Error updating Author with id=" + id
 //             });
 //         });
 // }
 
-// // Delete a Tutorial with the specified id in the request
+// // Delete a Author with the specified id in the request
 // exports.delete = (req, res) => {
 //     const id = req.params.id;
 
@@ -140,13 +123,13 @@ exports.findAll = (req, res) => {
 //                 });
 //             } else {
 //                 res.send({
-//                     message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+//                     message: `Cannot delete Author with id=${id}. Maybe Author was not found!`
 //                 });
 //             }
 //         })
 //         .catch(err => {
 //             res.status(500).send({
-//                 message: "Could not delete Tutorial with id=" + id
+//                 message: "Could not delete Author with id=" + id
 //             });
 //         });
 // };

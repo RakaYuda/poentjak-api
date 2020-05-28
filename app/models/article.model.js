@@ -24,11 +24,12 @@ module.exports = (sequelize, Sequelize) => {
         id_author: {
             type: Sequelize.INTEGER,
         }
-
-
+    
+    
     }, {
         timestamp: false,
         tableName: "blog",
     });
+
     return Article;
 };
