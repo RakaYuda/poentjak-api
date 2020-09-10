@@ -55,18 +55,18 @@ exports.findAll = (req, res) => {
     } : null;
 
     Mountain.findAll({
-            where: condition,
-            include: [
+        where: condition,
+        include: [
             { // Notice `include` takes an ARRAY
                 model: Image_Mountain,
                 as: 'image_mountain'
-            },{ 
+            }, {
                 model: Post_Mountain,
                 as: 'post_mountain'
             },],
-        })
+    })
         .then(data => {
-            res.send(data);
+            res.send({ mountains: data });
         })
         .catch(err => {
             res.status(500).send({

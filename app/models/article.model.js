@@ -1,4 +1,3 @@
-// const Author = require("./author.model.js");
 module.exports = (sequelize, Sequelize) => {
 
     const Article = sequelize.define("article", {
