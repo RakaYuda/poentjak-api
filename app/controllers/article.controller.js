@@ -184,7 +184,9 @@ exports.findAllPublished = (req, res) => {
             ]
         }, )
         .then(data => {
-            res.send(data);
+            res.send({
+                articles: data
+            });
         })
         .catch(err => {
             res.status(500).send({
