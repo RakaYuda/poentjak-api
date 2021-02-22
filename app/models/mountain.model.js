@@ -8,10 +8,22 @@ module.exports = (sequelize, Sequelize) => {
         name_mt: {
             type: Sequelize.STRING
         },
+        coordinate: {
+            type: Sequelize.STRING
+        },
+        rating: {
+            type: Sequelize.INTEGER
+        },
         img_mt: {
             type: Sequelize.STRING
         },
         location: {
+            type: Sequelize.STRING
+        },
+        description: {
+            type: Sequelize.STRING
+        },
+        notes: {
             type: Sequelize.STRING
         }
     
