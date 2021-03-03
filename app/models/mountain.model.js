@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     const Mountain = sequelize.define("mountain", {
         id: {
             primaryKey: true,
+            autoIncrement: true,
             type: Sequelize.INTEGER
         },
         name_mt: {

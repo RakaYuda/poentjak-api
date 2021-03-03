@@ -1,3 +1,4 @@
+const { image_mountains, post_mountains } = require("../models");
 const db = require("../models");
 const Op = db.Sequelize.Op;
 const Mountain = db.mountains;
@@ -28,8 +29,12 @@ exports.create = (req, res) => {
     // Create a Mountain
     const mountain = {
         name_mt: req.body.name_mt,
+        coordinate: req.body.coordinate,
+        rating: req.body.rating,
         img_mt: req.body.img_mt,
         location: req.body.location,
+        description: req.body.description,
+        notes: req.body.notes,
     };
 
     // Save Mountain in the database
@@ -90,62 +95,62 @@ exports.findOne = (req, res) => {
         });
 }
 
-// // Update a Tutorial by the id in the request
-// exports.update = (req, res) => {
-//     const id = req.params.id;
+// Update a Tutorial by the id in the request
+exports.update = (req, res) => {
+    const id = req.params.id;
 
-//     Article.update(req.body, {
-//             where: {
-//                 id: id
-//             }
-//         })
-//         .then(data => {
-//             res.send({
-//                 message: "Article was updated successfully."
-//             });
-//             // if (num == 1) {
-//             //     res.send({
-//             //         message: "Tutorial was updated successfully."
-//             //     });
-//             // } else {
-//             //     res.send({
-//             //         message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-//             //     });
-//             // }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error updating Tutorial with id=" + id
-//             });
-//         });
-// }
+    Mountain.update(req.body, {
+            where: {
+                id: id
+            }
+        })
+        .then(data => {
+            res.send({
+                message: "Mountain was updated successfully."
+            });
+            // if (num == 1) {
+            //     res.send({
+            //         message: "Mountain was updated successfully."
+            //     });
+            // } else {
+            //     res.send({
+            //         message: `Cannot update Mountain with id=${id}. Maybe Mountain was not found or req.body is empty!`
+            //     });
+            // }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Mountain with id=" + id
+            });
+        });
+}
 
 // // Delete a Tutorial with the specified id in the request
-// exports.delete = (req, res) => {
-//     const id = req.params.id;
+exports.delete = (req, res) => {
+    const id = req.params.id;
 
-//     Article.destroy({
-//             where: {
-//                 id: id
-//             }
-//         })
-//         .then(num => {
-//             if (num == 1) {
-//                 res.send({
-//                     message: "Article was deleted successfully!"
-//                 });
-//             } else {
-//                 res.send({
-//                     message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Could not delete Tutorial with id=" + id
-//             });
-//         });
-// };
+    Mountain.destroy({
+            where: {
+                id: id
+            }
+        })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Mountains was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Mountains with id=${id}. Maybe Tutorial was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Mountains with id=" + id
+            });
+        });
+};
 
 // // Delete all Tutorials from the database.
 // exports.deleteAll = (req, res) => {

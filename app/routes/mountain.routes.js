@@ -3,25 +3,25 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Create a new Tutorial
+    // Create a new Mountain
     router.post("/", mountains.create);
 
-    // Retrieve all articles
+    // Retrieve all Mountain
     router.get("/", mountains.findAll);
 
-    // Retrieve all published articles
+    // Retrieve all published Mountain
     // router.get("/published", articles.findAllPublished);
 
-    // Retrieve a single Tutorial with id
+    // Retrieve a single Mountain with id
     router.get("/:id", mountains.findOne);
 
-    // Update a Tutorial with id
-    // router.put("/:id", articles.update);
+    // Update a Mountain with id
+    router.put("/:id", mountains.update);
 
-    // Delete a Tutorial with id
-    // router.delete("/:id", articles.delete);
+    // Delete a Mountain with id
+    router.delete("/:id", mountains.delete);
 
-    // // Create a new Tutorial
+    // // Create a new Mountain
     // router.delete("/", articles.deleteAll);
 
     app.use('/api/mountains', router);
