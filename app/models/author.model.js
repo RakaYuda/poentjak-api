@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     const Author = sequelize.define("author", {
         id: {
             primaryKey: true,
+            autoIncrement: true,
             type: Sequelize.INTEGER
         },
         name_author: {

@@ -3,41 +3,33 @@ const Author = db.authors;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Author
-// exports.create = (req, res) => {
-//     // Validate request
-//     if (!req.body) {
-//         res.status(400).send({
-//             message: "Content can not be empty!"
-//         });
-//         return;
-//     }
+exports.create = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
 
-//     // Create a Author
-//     const article = {
-//         // title: req.body.title,
-//         // description: req.body.description,
-//         // published: req.body.published ? req.body.published : false
-//         // id: req.body.id,
-//         img_article: req.body.img_article,
-//         title_article: req.body.title_article,
-//         article: req.body.article,
-//         post_date: req.body.post_date,
-//         published: req.body.published,
-//         id_author: req.body.id_author
-//     };
+    // Create a Author
+    const author = {
+        name_author: req.body.name_author,
+        img_author: req.body.img_author,
+    };
 
-//     // Save Author in the database
-//     Article.create(article)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while creating the Author."
-//             });
-//         });
-// };
+    // Save Author in the database
+    Author.create(author)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Author."
+            });
+        });
+};
 
 
 // Retrieve all Tutorials from the database.
