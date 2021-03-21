@@ -10,7 +10,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         description: {
             type: Sequelize.STRING
+        },
+        id_mountain: {
+            type: Sequelize.INTEGER
         }
+
     
     }, {
         timestamp: false,
