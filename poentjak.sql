@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2020 pada 06.56
--- Versi server: 10.3.16-MariaDB
--- Versi PHP: 7.3.7
+-- Host: localhost:3306
+-- Generation Time: Mar 21, 2021 at 04:44 PM
+-- Server version: 5.7.32
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `author`
+-- Table structure for table `author`
 --
 
 CREATE TABLE `author` (
@@ -35,17 +33,18 @@ CREATE TABLE `author` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `author`
+-- Dumping data for table `author`
 --
 
 INSERT INTO `author` (`id`, `name_author`, `img_author`) VALUES
 (1, 'Yuda', 'https://images.pexels.com/photos/594610/pexels-photo-594610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
-(3, 'Sarah', 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+(3, 'Sarah', 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+(4, 'Tester', 'https://images.pexels.com/photos/3863793/pexels-photo-3863793.jpeg?cs=srgb&dl=pexels-kevin-bidwell-3863793.jpg&fm=jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `blog`
+-- Table structure for table `blog`
 --
 
 CREATE TABLE `blog` (
@@ -53,13 +52,13 @@ CREATE TABLE `blog` (
   `img_article` varchar(255) NOT NULL,
   `title_article` varchar(255) NOT NULL,
   `article` text NOT NULL,
-  `post_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `published` tinyint(1) NOT NULL,
   `id_author` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `blog`
+-- Dumping data for table `blog`
 --
 
 INSERT INTO `blog` (`id`, `img_article`, `title_article`, `article`, `post_date`, `published`, `id_author`) VALUES
@@ -74,7 +73,7 @@ INSERT INTO `blog` (`id`, `img_article`, `title_article`, `article`, `post_date`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `list_image_mountain`
+-- Table structure for table `list_image_mountain`
 --
 
 CREATE TABLE `list_image_mountain` (
@@ -84,7 +83,7 @@ CREATE TABLE `list_image_mountain` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `list_image_mountain`
+-- Dumping data for table `list_image_mountain`
 --
 
 INSERT INTO `list_image_mountain` (`id`, `img_mt`, `id_mountain`) VALUES
@@ -94,28 +93,33 @@ INSERT INTO `list_image_mountain` (`id`, `img_mt`, `id_mountain`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mountain`
+-- Table structure for table `mountain`
 --
 
 CREATE TABLE `mountain` (
   `id` int(11) NOT NULL,
   `name_mt` varchar(255) NOT NULL,
+  `coordinate` varchar(255) NOT NULL,
+  `rating` int(1) NOT NULL,
   `img_mt` varchar(255) NOT NULL,
-  `location` varchar(255) NOT NULL
+  `location` varchar(255) NOT NULL,
+  `description` varchar(2750) NOT NULL,
+  `notes` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mountain`
+-- Dumping data for table `mountain`
 --
 
-INSERT INTO `mountain` (`id`, `name_mt`, `img_mt`, `location`) VALUES
-(1, 'Mt. Fuji', 'https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Honshu, Japan'),
-(2, 'Mt. Everest', 'https://www.outsideonline.com/sites/default/files/styles/full-page/public/2020/03/11/everest-north-side-china_h.jpg?itok=envCwX0c', 'Southeast Ridge, Nepal');
+INSERT INTO `mountain` (`id`, `name_mt`, `coordinate`, `rating`, `img_mt`, `location`, `description`, `notes`) VALUES
+(1, 'Mt. Fuji', '35.3585184,138.7123452', 5, 'https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Honshu, Japan', 'this is desc', 'this is notes'),
+(2, 'Mt. Everest', '', 0, 'https://www.outsideonline.com/sites/default/files/styles/full-page/public/2020/03/11/everest-north-side-china_h.jpg?itok=envCwX0c', 'Southeast Ridge, Nepal', '', ''),
+(3, 'Mt. Rinjani', '-8.4112737,116.448594', 5, 'https://images.pexels.com/photos/4552238/pexels-photo-4552238.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'Lombok Timur, NTB', '3.726 masl', 'There is most beautiful sunrise in NTB');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mountain_post`
+-- Table structure for table `mountain_post`
 --
 
 CREATE TABLE `mountain_post` (
@@ -126,7 +130,7 @@ CREATE TABLE `mountain_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mountain_post`
+-- Dumping data for table `mountain_post`
 --
 
 INSERT INTO `mountain_post` (`id`, `post_name`, `description`, `id_mountain`) VALUES
@@ -137,94 +141,93 @@ INSERT INTO `mountain_post` (`id`, `post_name`, `description`, `id_mountain`) VA
 --
 
 --
--- Indeks untuk tabel `author`
+-- Indexes for table `author`
 --
 ALTER TABLE `author`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `blog`
+-- Indexes for table `blog`
 --
 ALTER TABLE `blog`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_author` (`id_author`);
 
 --
--- Indeks untuk tabel `list_image_mountain`
+-- Indexes for table `list_image_mountain`
 --
 ALTER TABLE `list_image_mountain`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mountain` (`id_mountain`);
 
 --
--- Indeks untuk tabel `mountain`
+-- Indexes for table `mountain`
 --
 ALTER TABLE `mountain`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `mountain_post`
+-- Indexes for table `mountain_post`
 --
 ALTER TABLE `mountain_post`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mountain` (`id_mountain`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `author`
+-- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `blog`
+-- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `list_image_mountain`
+-- AUTO_INCREMENT for table `list_image_mountain`
 --
 ALTER TABLE `list_image_mountain`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `mountain`
+-- AUTO_INCREMENT for table `mountain`
 --
 ALTER TABLE `mountain`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `mountain_post`
+-- AUTO_INCREMENT for table `mountain_post`
 --
 ALTER TABLE `mountain_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `blog`
+-- Constraints for table `blog`
 --
 ALTER TABLE `blog`
   ADD CONSTRAINT `fk_author` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `list_image_mountain`
+-- Constraints for table `list_image_mountain`
 --
 ALTER TABLE `list_image_mountain`
   ADD CONSTRAINT `list_image_mountain_ibfk_1` FOREIGN KEY (`id_mountain`) REFERENCES `mountain` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `mountain_post`
+-- Constraints for table `mountain_post`
 --
 ALTER TABLE `mountain_post`
   ADD CONSTRAINT `mountain_post_ibfk_1` FOREIGN KEY (`id_mountain`) REFERENCES `mountain` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
