@@ -7,13 +7,16 @@ module.exports = app => {
     // router.post("/", post_moutains.create);
 
     // Retrieve all Mountain
-    router.get("/:id", post_mountain.findAll);
+    router.get("/", post_mountain.findAll);
+
+    // Retrieve all post by mountain id
+    router.get("/mountain/:id", post_mountain.findByMountain);
 
     // Retrieve all published Mountain
     // router.get("/published", articles.findAllPublished);
 
     // Retrieve a single Mountain with id
-    // router.get("/:id", post_moutains.findOne);
+    router.get("/:id", post_mountain.findOne);
 
     // Update a Mountain with id
     // router.put("/:id", mountains.update);

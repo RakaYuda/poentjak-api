@@ -4,15 +4,6 @@ const Op = db.Sequelize.Op;
 const Mountain = db.mountains;
 const Post_Mountain = db.post_mountains;
 
-
-// Post_Mountain.belongsTo(Mountain)
-
-// Mountain.hasMany(Post_Mountain, {
-//     as: 'post_mountain',
-//     foreignKey: 'id_mountain'
-// })
-
-
 // Create and Save a new Mountain
 exports.create = (req, res) => {
     // Validate request
@@ -46,14 +37,22 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    // const mount_name = req.query.name_mt;
-    const id = req.params.id;
+    Post_Mountain.findAll({
+        })
+        .then(data => {
+            res.send({ post_mountains: data });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving Mountains."
+            });
+        });
+};
 
-    // var condition = mount_name ? {
-    //     mount_name: {
-    //         [Op.like]: `%${mount_name}%`
-    //     }
-    // } : null;
+// Retrieve all Tutorials from the database.
+exports.findByMountain = (req, res) => {
+  
+    const id = req.params.id;
 
     var condition = id ? {
         id_mountain: {
@@ -62,15 +61,7 @@ exports.findAll = (req, res) => {
     } : null;
 
     Post_Mountain.findAll({
-        where: condition,
-        // include: [
-        //     { // Notice `include` takes an ARRAY
-        //         model: Image_Mountain,
-        //         as: 'image_mountain'
-        //     }, {
-        //         model: Post_Mountain,
-        //         as: 'post_mountain'
-        //     },],
+        where: condition
     })
         .then(data => {
             res.send({ post_mountains: data });
