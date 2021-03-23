@@ -59,72 +59,72 @@ exports.findAll = (req, res) => {
 };
 
 // // Find a single Author with an id
-// exports.findOne = (req, res) => {
-//     const id = req.params.id;
+exports.findOne = (req, res) => {
+    const id = req.params.id;
 
-//     Article.findByPk(id)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving Author with id=" + id
-//             });
-//         });
-// }
+    Author.findByPk(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Author with id=" + id
+            });
+        });
+}
 
 // // Update a Author by the id in the request
-// exports.update = (req, res) => {
-//     const id = req.params.id;
+exports.update = (req, res) => {
+    const id = req.params.id;
 
-//     Article.update(req.body, {
-//         where: { id: id }
-//     })
-//         .then(data => {
-//             res.send({
-//                 message: "Article was updated successfully."
-//             });
-//             // if (num == 1) {
-//             //     res.send({
-//             //         message: "Author was updated successfully."
-//             //     });
-//             // } else {
-//             //     res.send({
-//             //         message: `Cannot update Author with id=${id}. Maybe Author was not found or req.body is empty!`
-//             //     });
-//             // }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error updating Author with id=" + id
-//             });
-//         });
-// }
+    Author.update(req.body, {
+        where: { id: id }
+    })
+        .then(data => {
+            res.send({
+                message: "Article was updated successfully."
+            });
+            // if (num == 1) {
+            //     res.send({
+            //         message: "Author was updated successfully."
+            //     });
+            // } else {
+            //     res.send({
+            //         message: `Cannot update Author with id=${id}. Maybe Author was not found or req.body is empty!`
+            //     });
+            // }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Author with id=" + id
+            });
+        });
+}
 
 // // Delete a Author with the specified id in the request
-// exports.delete = (req, res) => {
-//     const id = req.params.id;
+exports.delete = (req, res) => {
+    const id = req.params.id;
 
-//     Article.destroy({
-//         where: { id: id }
-//     })
-//         .then(num => {
-//             if (num == 1) {
-//                 res.send({
-//                     message: "Article was deleted successfully!"
-//                 });
-//             } else {
-//                 res.send({
-//                     message: `Cannot delete Author with id=${id}. Maybe Author was not found!`
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Could not delete Author with id=" + id
-//             });
-//         });
-// };
+    Author.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Article was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Author with id=${id}. Maybe Author was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Author with id=" + id
+            });
+        });
+};
 
 // // Delete all Tutorials from the database.
 // exports.deleteAll = (req, res) => {

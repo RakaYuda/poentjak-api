@@ -9,17 +9,14 @@ module.exports = app => {
     // Retrieve all Author
     router.get("/", authors.findAll);
 
-    // Retrieve all published articles
-    // router.get("/published", articles.findAllPublished);
-
     // Retrieve a single Tutorial with id
-    // router.get("/:id", articles.findOne);
+    router.get("/:id", authors.findOne);
 
     // Update a Tutorial with id
-    // router.put("/:id", articles.update);
+    router.put("/:id", authors.update);
 
     // Delete a Tutorial with id
-    // router.delete("/:id", articles.delete);
+    router.delete("/:id", authors.delete);
 
     // // Create a new Tutorial
     // router.delete("/", articles.deleteAll);
