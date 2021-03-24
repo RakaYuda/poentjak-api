@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Mountain
-    // router.post("/", post_moutains.create);
+    router.post("/", post_mountain.create);
 
     // Retrieve all Mountain
     router.get("/", post_mountain.findAll);
@@ -19,10 +19,10 @@ module.exports = app => {
     router.get("/:id", post_mountain.findOne);
 
     // Update a Mountain with id
-    // router.put("/:id", mountains.update);
+    router.put("/:id", post_mountain.update);
 
     // Delete a Mountain with id
-    // router.delete("/:id", mountains.delete);
+    router.delete("/:id", post_mountain.delete);
 
     // // Create a new Mountain
     // router.delete("/", articles.deleteAll);

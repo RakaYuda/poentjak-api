@@ -89,61 +89,61 @@ exports.findOne = (req, res) => {
 }
 
 // Update a Tutorial by the id in the request
-// exports.update = (req, res) => {
-//     const id = req.params.id;
+exports.update = (req, res) => {
+    const id = req.params.id;
 
-//     Mountain.update(req.body, {
-//             where: {
-//                 id: id
-//             }
-//         })
-//         .then(data => {
-//             res.send({
-//                 message: "Mountain was updated successfully."
-//             });
-//             // if (num == 1) {
-//             //     res.send({
-//             //         message: "Mountain was updated successfully."
-//             //     });
-//             // } else {
-//             //     res.send({
-//             //         message: `Cannot update Mountain with id=${id}. Maybe Mountain was not found or req.body is empty!`
-//             //     });
-//             // }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error updating Mountain with id=" + id
-//             });
-//         });
-// }
+    Post_Mountain.update(req.body, {
+            where: {
+                id: id
+            }
+        })
+        .then(data => {
+            res.send({
+                message: "Post_Mountain was updated successfully."
+            });
+            // if (num == 1) {
+            //     res.send({
+            //         message: "Mountain was updated successfully."
+            //     });
+            // } else {
+            //     res.send({
+            //         message: `Cannot update Mountain with id=${id}. Maybe Mountain was not found or req.body is empty!`
+            //     });
+            // }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Mountain with id=" + id
+            });
+        });
+}
 
-// // Delete a Tutorial with the specified id in the request
-// exports.delete = (req, res) => {
-//     const id = req.params.id;
+// Delete a Tutorial with the specified id in the request
+exports.delete = (req, res) => {
+    const id = req.params.id;
 
-//     Mountain.destroy({
-//             where: {
-//                 id: id
-//             }
-//         })
-//         .then(num => {
-//             if (num == 1) {
-//                 res.send({
-//                     message: "Mountains was deleted successfully!"
-//                 });
-//             } else {
-//                 res.send({
-//                     message: `Cannot delete Mountains with id=${id}. Maybe Tutorial was not found!`
-//                 });
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Could not delete Mountains with id=" + id
-//             });
-//         });
-// };
+    Post_Mountain.destroy({
+            where: {
+                id: id
+            }
+        })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Post_Mountain was deleted successfully!"
+                });
+            } else {
+                res.send({
+                    message: `Cannot delete Post_Mountain with id=${id}. Maybe Tutorial was not found!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Mountains with id=" + id
+            });
+        });
+};
 
 // // Delete all Tutorials from the database.
 // exports.deleteAll = (req, res) => {
