@@ -12,9 +12,6 @@ module.exports = app => {
     // Retrieve all post by mountain id
     router.get("/mountain/:id", post_mountain.findByMountain);
 
-    // Retrieve all published Mountain
-    // router.get("/published", articles.findAllPublished);
-
     // Retrieve a single Mountain with id
     router.get("/:id", post_mountain.findOne);
 

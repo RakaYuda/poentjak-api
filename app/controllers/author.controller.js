@@ -82,7 +82,7 @@ exports.update = (req, res) => {
     })
         .then(data => {
             res.send({
-                message: "Article was updated successfully."
+                message: "Author was updated successfully."
             });
             // if (num == 1) {
             //     res.send({
@@ -111,7 +111,7 @@ exports.delete = (req, res) => {
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Article was deleted successfully!"
+                    message: "Author was deleted successfully!"
                 });
             } else {
                 res.send({
@@ -133,14 +133,14 @@ exports.delete = (req, res) => {
 
 // // Find all published Tutorials
 // exports.findAllPublished = (req, res) => {
-//     Article.findAll({ where: { published: true } })
+//     Author.findAll({ where: { published: true } })
 //         .then(data => {
 //             res.send(data);
 //         })
 //         .catch(err => {
 //             res.status(500).send({
 //                 message:
-//                     err.message || "Some error occurred while retrieving Articles."
+//                     err.message || "Some error occurred while retrieving Authors."
 //             });
 //         });
 // };

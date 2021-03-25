@@ -24,13 +24,12 @@ exports.create = (req, res) => {
 
     // Create a Article
     const article = {
-        // published: req.body.published ? req.body.published : false
         img_article: req.body.img_article,
         title_article: req.body.title_article,
         article: req.body.article,
-        post_date: req.body.post_date,
-        published: req.body.published,
-        id_author: req.body.id_author
+        id_author: req.body.id_author,
+        published: req.body.published ? req.body.published : false,
+        
     };
 
     // Save Article in the database
