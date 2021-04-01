@@ -67,15 +67,9 @@ exports.findAll = (req, res) => {
                 "article",
                 [db.sequelize.fn('date_format', db.sequelize.col('post_date'), '%Y-%m-%d %H:%i:%S'), 'post_date'],
                 "published",
-                // "id_author",
             ]
         })
-        // .then(function (result) {
-        //     console.log(result);
-
-        // })
         .then(data => {
-
             res.send(data);
         })
         .catch(err => {
@@ -89,7 +83,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Article.findByPk(id)
+    Article.findByPk(id, {
+            attributes: [
+                "id",
+                "img_article",
+                "title_article",
+                "article",
+                [db.sequelize.fn('date_format', db.sequelize.col('post_date'), '%Y-%m-%d %H:%i:%S'), 'post_date'],
+                "published",
+            ]
+        })
         .then(data => {
             res.send(data);
         })
