@@ -25,7 +25,7 @@ const db = require("./app/models");
 // simple route
 app.get("/", (req, res) => {
     res.json({
-        message: "Welcome to bezkoder application."
+        message: "Welcome to Poentjak App."
     });
 });
 
